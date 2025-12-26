@@ -7,9 +7,9 @@
 
 body {
     min-height: 100vh;
-    /* background: linear-gradient(-45deg, #b8e1ff, #d9c7ff, #f5f9ff, #e0e7ff); */
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xlYXIlMjBza3l8ZW58MHx8MHx8fDA%3D&w=1000&q=80');
+    background: linear-gradient(-45deg, #b8e1ff, #d9c7ff, #f5f9ff, #e0e7ff);
+    /* background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xlYXIlMjBza3l8ZW58MHx8MHx8fDA%3D&w=1000&q=80'); */
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     display: flex;
