@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <div class="header">
+            <div class="logo">☀️ Weather</div>
+
+            <div class="d-flex gap-2">
+                <input class="search" id="cityInput" placeholder="Enter city name">
+                <button class="btn btn-day " onclick="SearchClick()" id="searchBtn">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="main d-flex ">
+
+            <div class="current w-75 text-center p-4">
+                <div class="city" id="cityName">--</div>
+                <div class="temp" id="temp">--°</div>
+                <div class="desc" id="desc">Weather</div>
+
+                <div class="stats">
+                    <div class="stat" id="feels">Feels --°</div>
+                    <div class="stat" id="high">High --°</div>
+                    <div class="stat" id="low">Low --°</div>
+                </div>
+
+            </div>
+
+            <div class="details">
+                <div class="card">
+                    <h4>Humidity</h4>
+                    <p id="humidity">--</p>
+                </div>
+                <div class="card">
+                    <h4>Wind</h4>
+                    <p id="wind">--</p>
+                </div>
+                <div class="card">
+                    <h4>Visibility</h4>
+                    <p id="visibility">--</p>
+                </div>
+                <div class="card">
+                    <h4>Pressure</h4>
+                    <p id="pressure">--</p>
+                </div>
+                <div class="card">
+                    <h4>Sun Cycle</h4>
+                    <p id="sun">--</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        function SearchClick() {
+
+            const cityName = document.getElementById("cityInput").value;
+
+            if (cityName === "") {
+                alert("City name likho bro 😅");
+                return;
+            }
+
+
+            var apiurl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=e59957080760435804230af34932207c&units=metric';
+            fetch(apiurl)
+            
+                .then(function (response) {
+                    if (!response.ok) {
+                        alert("City not found 😞");
+                        return;
+                    }
+                    return response.json();
+                })
+
+
+                .then(function (weatherData) {
+                    document.getElementById("cityName").innerText = weatherData.name;
+                    document.getElementById("temp").innerText = Math.round(weatherData.main.temp) + "°";
+                    document.getElementById("desc").innerText = weatherData.weather[0].description;
+                    document.getElementById("feels").innerText = "Feels " + Math.round(weatherData.main.feels_like) + "°";
+                    document.getElementById("high").innerText = "High " + Math.round(weatherData.main.temp_max) + "°";
+                    document.getElementById("low").innerText = "Low " + Math.round(weatherData.main.temp_min) + "°";
+                    document.getElementById("humidity").innerText = weatherData.main.humidity + "%";
+                    document.getElementById("wind").innerText = weatherData.wind.speed + " m/s";
+                    document.getElementById("visibility").innerText = (weatherData.visibility / 1000) + " km";
+                    document.getElementById("pressure").innerText = weatherData.main.pressure + " hPa";
+                    var sunrise = new Date(weatherData.sys.sunrise * 1000);
+                    var sunset = new Date(weatherData.sys.sunset * 1000);
+                    document.getElementById("sun").innerText = "Sunrise: " + sunrise.getHours() + ":" + sunrise.getMinutes() + " Sunset: " + sunset.getHours() + ":" + sunset.getMinutes();
+
+
+                });
+        }
+        document.getElementById("cityInput").value = "hyderabad";
+        SearchClick();
+
+
+    </script>
+
+</body>
+
+</html>
